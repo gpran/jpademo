@@ -3,10 +3,11 @@ package com.crud.jpademo.Controller;
 import com.crud.jpademo.Entity.User;
 import com.crud.jpademo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/user")
@@ -18,17 +19,19 @@ public class UserController {
         return userService.showAll();
     }
 
-    @RequestMapping(value = "/showById", method = RequestMethod.GET)
-    public @ResponseBody String showById(){
-        return"Hello!";
+    @RequestMapping(value = "/showById/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<User> showById(@PathVariable(value= "id") long id){
+        return userService.showById(id);
+        //return"Hello!";
     }
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public @ResponseBody String create(){
-        return"Hello!";
+    public @ResponseBody User create(@RequestBody User user){
+        return userService.create(user);
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public @ResponseBody String delete(){
-        return"Hello!";
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody String delete(@PathVariable(value= "id") long id){
+        userService.delete(id);
+        return "Deleted";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)

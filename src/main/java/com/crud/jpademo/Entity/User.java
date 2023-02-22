@@ -1,18 +1,22 @@
 package com.crud.jpademo.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 @Entity
 public class User {
     @Getter
     @Setter
     @Id
-    private int db_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long db_id;
     @Getter
     @Setter
     private String name;
@@ -27,5 +31,5 @@ public class User {
     private String section;
     @Getter
     @Setter
-    private Timestamp date;
+    private Date date;
 }
