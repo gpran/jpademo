@@ -34,9 +34,9 @@ public class UserController {
         return "Deleted";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public @ResponseBody String update(){
-        return"Hello!";
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public @ResponseBody String update(@PathVariable(value= "id") long id, @RequestBody User user){
+        return userService.update(id,user);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

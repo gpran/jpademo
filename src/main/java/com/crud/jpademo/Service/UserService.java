@@ -9,7 +9,7 @@ public interface UserService {
     public Optional<User> showById(long id);
     public User create(User user);
     public void delete(long id);
-    public void update(long id);
+    public String update(long id, User ur);
     public void login();
     public void home();
 }

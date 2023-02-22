@@ -28,8 +28,16 @@ public class UserServiceImpl implements UserService {
     public void delete(long id){
         userRepo.deleteById((int)id);
     }
-    public void update(long id){
-        //userRepo.
+    public String update(long id, User ur){
+        Optional<User> utemp=userRepo.findById((int)id);
+        User u1=utemp.get();
+        u1.setDb_id(id);
+        u1.setName(ur.getName());
+        u1.setAge(ur.getAge());
+        u1.setStandard(ur.getStandard());
+        u1.setSection(ur.getSection());
+        userRepo.save(u1);
+        return "User Saved";
     }
     public void login(){}
     public void home(){}
