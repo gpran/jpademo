@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Entity
-public class User {
+public class Student {
     @Getter
     @Setter
     @Id

@@ -1,50 +1,47 @@
 package com.crud.jpademo.Controller;
 
-import com.crud.jpademo.Entity.User;
-import com.crud.jpademo.Service.UserService;
+import com.crud.jpademo.Entity.Student;
+import com.crud.jpademo.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/user")
-public class UserController {
+public class StudentController {
     @Autowired
-    private UserService userService;
+    private StudentService studentService;
     @RequestMapping(value = "/showAll", method = RequestMethod.GET)
-    public @ResponseBody Iterable<User> showAll(){
-        return userService.showAll();
+    public @ResponseBody Iterable<Student> showAll(){
+        return studentService.showAll();
     }
 
     @RequestMapping(value = "/showById/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<User> showById(@PathVariable(value= "id") long id){
-        return userService.showById(id);
+    public @ResponseBody Optional<Student> showById(@PathVariable(value= "id") long id){
+        return studentService.showById(id);
         //return"Hello!";
     }
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public @ResponseBody User create(@RequestBody User user){
-        return userService.create(user);
+    public @ResponseBody Student create(@RequestBody Student student){
+        return studentService.create(student);
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody String delete(@PathVariable(value= "id") long id){
-        userService.delete(id);
+        studentService.delete(id);
         return "Deleted";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    public @ResponseBody String update(@PathVariable(value= "id") long id, @RequestBody User user){
-        return userService.update(id,user);
+    public @ResponseBody String update(@PathVariable(value= "id") long id, @RequestBody Student student){
+        return studentService.update(id, student);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody String login(){
-        return"Hello!";
+        return"Login Success!";
     }
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public @ResponseBody String home(){
-        return"Hello!";
+        return"Home Page";
     }
 }
