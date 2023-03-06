@@ -17,7 +17,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.findAll();
     }
     public Optional<Student> showById(long id){
-        return studentRepo.findById((int) id);
+        return studentRepo.findById(id);
     }
     public Student create(Student student){
         //user.setDb_id(ObjectId.get() );
@@ -26,10 +26,10 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.save(student);
     }
     public void delete(long id){
-        studentRepo.deleteById((int)id);
+        studentRepo.deleteById(id);
     }
     public String update(long id, Student ur){
-        Optional<Student> utemp= studentRepo.findById((int)id);
+        Optional<Student> utemp= studentRepo.findById(id);
         Student u1=utemp.get();
         u1.setDb_id(id);
         u1.setName(ur.getName());

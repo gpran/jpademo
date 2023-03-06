@@ -1,35 +1,37 @@
 package com.crud.jpademo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 
+@Data
 @Entity
+@Table(name="student", uniqueConstraints={
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Student {
-    @Getter
-    @Setter
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long db_id;
-    @Getter
-    @Setter
     private String name;
-    @Getter
-    @Setter
     private int age;
-    @Getter
-    @Setter
     private int standard;
-    @Getter
-    @Setter
     private String section;
-    @Getter
-    @Setter
     private Date date;
+    private String username;
+    private String email;
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "student_roles",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "db_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 }
