@@ -2,6 +2,7 @@ package com.crud.jpademo.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -34,12 +35,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .and()
-                .authorizeRequests((requests) -> requests
-                        .requestMatchers("/", "/login/**","/hello/**", "/signup/**").permitAll()
-                        .requestMatchers("/home/**").hasRole("ADMIN")
-                        .requestMatchers("/create","/showAll","/showById","/delete","/update").hasRole("ADMIN")
+                //.httpBasic()
+                //.and()
+                .csrf().disable()
+                .authorizeRequests((authorize) -> authorize
+                        .requestMatchers(HttpMethod.GET,"/", "/login/**","/hello/**", "/signup/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/**", "/signup/**").permitAll()
+                        .requestMatchers("/home/**").hasRole("USER")
+                        .requestMatchers("/home/**","/create","/showAll","/showById","/delete","/update").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .logout((logout) -> logout.permitAll());

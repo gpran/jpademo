@@ -16,8 +16,6 @@ import java.util.Set;
         @UniqueConstraint(columnNames = {"email"})
 })
 public class Student {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long db_id;
