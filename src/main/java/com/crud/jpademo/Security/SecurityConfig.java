@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .httpBasic()
                 .and()
                 .authorizeRequests((requests) -> requests
-                        .requestMatchers("/", "/login/**","/hello/**").permitAll()
+                        .requestMatchers("/", "/login/**","/hello/**", "/signup/**").permitAll()
                         .requestMatchers("/home/**").hasRole("ADMIN")
                         .requestMatchers("/create","/showAll","/showById","/delete","/update").hasRole("ADMIN")
                         .anyRequest().authenticated()
